@@ -1,5 +1,6 @@
 package com.example.feixue.view;
 
+import com.alibaba.druid.util.StringUtils;
 import com.alibaba.fastjson.JSON;
 import com.example.feixue.bean.User;
 import com.example.feixue.controller.logical.RegisterByLogOn;
@@ -25,28 +26,18 @@ public class Index {
     @Autowired
     private RegisterByLogOn registerByLogOn;
 
-    @RequestMapping(value = "/indexService")
-    public String getIndex(ModelMap model) {
-        logger.info("进入登陆页面");
-        User user = new User();
-        model.addAttribute("user", user);
-        return "index";
-    }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public String getUser(ModelMap model, User user) {
+    public String getUser(@RequestBody String userJson) {
         logger.info("登陆判断");
+        User user = JSON.parseObject(userJson, User.class);
         user = registerByLogOn.logOn(user);
-        if (null != user && null != user.getUserid() && !user.getUserid().equals("")) {
+        if (user != null && !StringUtils.isEmpty(user.getUsername()) && !StringUtils.isEmpty(user.getPassword())) {
             registerByLogOn.setUser(user);
-            model.addAttribute("users", registerByLogOn.getUser(user));
-            model.addAttribute("user2", registerByLogOn.getUser());
-            return "friendIndex";
         } else {
-            model.addAttribute("user", new User());
-            return "index";
+            return "false";
         }
-
+        return "true";
     }
 
     @RequestMapping(value = "/get")
@@ -66,10 +57,10 @@ public class Index {
     }
 
     @RequestMapping(value = "/setUser")
-    public String setUser(@RequestBody String user) {
+    public String setUser(@RequestBody String userJson) {
         logger.info("正在注册");
-        User userBean = JSON.parseObject(user, User.class);
-        userBean = registerByLogOn.Register(userBean);
-        return JSON.toJSONString(userBean);
+        User user = JSON.parseObject(userJson, User.class);
+        user = registerByLogOn.Register(user);
+        return JSON.toJSONString(user);
     }
 }

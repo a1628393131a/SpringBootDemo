@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * @author 16283
+ */
 @RestController
 @SpringBootApplication
 @ServletComponentScan
