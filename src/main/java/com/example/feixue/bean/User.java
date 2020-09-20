@@ -19,20 +19,41 @@ import java.io.Serializable;
 @Table(name = "user")
 public class User implements Serializable {
     private static final long serialVersionUID = 6839815172664768378L;
+    /**
+     * 用户账号
+     */
     @Id
-    private String userid;//用户账号
+    private String userid;
     @Column(nullable = false,unique = true)
-    private String username;//用户名
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 用户密码
+     */
     @Column(nullable = false,unique = true)
-    private String password;//用户密码
+    private String password;
+    /**
+     * 性别
+     */
     @Column(nullable = false,unique = true)
-    private String sex;//性别
+    private String sex;
+    /**
+     * 年龄
+     */
     @Column(nullable = false,unique = true)
-    private String age;//年龄
+    private String age;
+    /**
+     * 电话
+     */
     @Column(nullable = false,unique = true)
-    private String phone;//电话
+    private String phone;
+    /**
+     * 出生日期
+     */
     @Column(nullable = false,unique = true)
-    private String birthday;//出生日期
+    private String birthday;
 
     public String getUserid() {
         return userid;
