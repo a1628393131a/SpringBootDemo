@@ -12,6 +12,11 @@ import java.util.Calendar;
  * @Date 创建时间 2020/5/30 12:49
  */
 public class DateUtil {
+    /**
+     *
+     * @param date1
+     * @return
+     */
     public static String getAgent(String date1){
         int year1 = Integer.valueOf(date1.substring(0,4));
         Calendar date2 = Calendar.getInstance();
